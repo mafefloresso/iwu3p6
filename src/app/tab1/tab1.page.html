@@ -62,6 +62,12 @@
           <ion-button expand="block" (click)="addToCart(product, i)">
             <ion-icon name="cart-outline" ></ion-icon>
           </ion-button>
+          <ion-button expand="block" (click)="removeProduct(product, i)">
+            <ion-icon name="trash-outline" ></ion-icon>
+          </ion-button>
+          <ion-button expand="block" (click)="openUpdateProductPage(product)">
+            <ion-icon name="create-outline" ></ion-icon>
+          </ion-button>
         </ion-card>
       </ion-col>
     </ion-row>

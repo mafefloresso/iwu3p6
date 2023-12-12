@@ -27,6 +27,24 @@ export class AddProductPage {
   async saveProduct() {
     if (this.productForm.valid) {
       const product = this.productForm.value;
+      this.productService.saveProduct(product)
+      .then(async(result)=>{
+        if(result == 'success'){
+          console.log('Producto guardado exitosamente');
+          const toast = await this.toastController.create({
+            message: 'Producto guardado correctamente',
+            duration: 2000, // Duración de 2 segundos
+            position: 'top' // Posición superior
+          });
+          toast.present();
+        }else{
+          console.log('Error al guardar el producto');
+        }
+      })
+      .catch((error)=>{
+        console.log('Error');
+      })
+      /*
       this.productService.saveProduct(product).subscribe({
         next: (response) => {
           // next callback
@@ -42,17 +60,12 @@ export class AddProductPage {
           // complete callback
           console.log('Subscription completed.');
         }
-      });
+      });*/
     } else {
       console.warn('El formulario no es válido. Por favor, completa todos los campos requeridos.');
     }
 
-    const toast = await this.toastController.create({
-      message: 'Producto guardado correctamente',
-      duration: 2000, // Duración de 2 segundos
-      position: 'top' // Posición superior
-    });
-    toast.present();
+
 
     // Redirigir a la pestaña tab1
     this.router.navigate(['/tabs/tab1']);
